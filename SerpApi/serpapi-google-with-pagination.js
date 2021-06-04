@@ -1,8 +1,9 @@
 const SerpApi = require("google-search-results-nodejs");
 const search = new SerpApi.GoogleSearch(process.env["API_KEY"]);
+let totalResult = 0;
 
 const params = {
-  q: "watch movies online free",
+  q: "movies",
   location: "Austin, TX",
 };
 
@@ -11,9 +12,13 @@ function paginationCallback(result) {
 
   for (organicResult of result.organic_results) {
     console.log(organicResult.link);
+    totalResult += links.length;
   }
 
-  if (result.serpapi_pagination.current == 5) return
+  if (result.serpapi_pagination.current == 5) {
+    console.log("Number of results: ", totalResult);
+    return;
+  }
 
   const num = params.num || 10;
 

@@ -1,8 +1,9 @@
 const puppeteer = require("puppeteer");
-const queryup = "watch movies online free";
+const queryup = "movies";
 const query = encodeURI(queryup);
 let currentPage = 0;
-const pages = 5;
+const pages = 2;
+let totalResult = 0;
 
 async function googler() {
   for (let i = 0; i < pages; i++) {
@@ -22,8 +23,10 @@ async function googler() {
     await browser.close();
     console.log("----- Page number: " + currentPage / 10 + " -----");
     console.log(links);
+    totalResult += links.length;
     currentPage += 10;
   }
+  console.log("Number of result: ", totalResult);
 }
 
 googler();

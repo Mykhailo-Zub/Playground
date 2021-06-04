@@ -1,5 +1,5 @@
 const puppeteer = require("puppeteer");
-const searchString = "dollar to euro";
+const searchString = "cats";
 const encodedString = encodeURI(searchString);
 
 async function run() {
@@ -19,4 +19,4 @@ async function run() {
   console.log(links);
 }
 
-run(SEARCH_URL);
+run();
