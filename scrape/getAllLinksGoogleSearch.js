@@ -12,7 +12,7 @@ async function googler() {
     await page.goto(
       `https://www.google.com/search?q=${query}&start=${currentPage}`
     );
-    await await page.waitForSelector(".yuRUbf > a");
+    await page.waitForSelector(".yuRUbf > a");
 
     const links = await page.evaluate(function getUrls() {
       return Array.from(document.querySelectorAll(".yuRUbf > a")).map((el) =>
