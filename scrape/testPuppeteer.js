@@ -3,67 +3,26 @@ const StealthPlugin = require("puppeteer-extra-plugin-stealth");
 
 puppeteer.use(StealthPlugin());
 
-let scrape = async () => {
-  const browser = await puppeteer.launch(
-    {
-      headless: false,
-    },
-    { args: ["--no-sandbox", "--disabled-setuid-sandbox"] }
-  );
+async function scrapeOpenTable() {
+  const BASE_URL =
+    "https://www.opentable.co.uk/s?dateTime=2021-05-30T19%3A00%3A00&covers=2&latitude=51.525225&longitude=-0.079615";
+
+  const browser = await puppeteer.launch({
+    headless: false,
+    args: ["--no-sandbox", "--disable-setuid-sandbox"],
+  });
   const page = await browser.newPage();
+  await page.goto(BASE_URL);
+  // More commands here...
+  /* You may view the docs at:
+       https://devdocs.io/puppeteer/
+     And more magic at:
+       https://www.npmjs.com/package/puppeteer
+     Github:
+       https://github.com/puppeteer/puppeteer
+  */
 
-  const searchQuery = "Alitas+del+Cadillac+Tumbaco";
-  const Url = `https://www.google.com/`;
+  // await browser.close();
+}
 
-  const click1 = ".gLFyf";
-
-  await page.goto(Url);
-  await page.waitForSelector(click1);
-  // await page.click(click1);
-  await page.type(click1, searchQuery, {delay: 10})
-  await page.waitForTimeout(3000);
-
-//   const commentString = await page.evaluate(function () {
-//     return document.querySelector(".jANrlb div:last-child").textContent;
-//   });
-
-//   const index = commentString.indexOf(" ");
-//   const option1 = parseInt(commentString.slice(0, index));
-//   const option2 = parseInt(commentString.slice(index + 1));
-
-//   function totalComments() {
-//     if (option1) {
-//       return option1;
-//     } else {
-//       return option2;
-//     }
-//   }
-
-//   let currentComments = 0;
-
-//   while (currentComments < totalComments() - 1) {
-//     currentComments = await page.evaluate(function () {
-//       return document.querySelectorAll(".ODSEW-ShBeI").length;
-//     });
-//     await page.waitForTimeout(3000);
-//     await page.evaluate(function () {
-//       const lastElementInContainer = [
-//         ...document.querySelectorAll(".ODSEW-ShBeI"),
-//       ].pop();
-//       lastElementInContainer.scrollIntoView();
-//     });
-//   }
-
-//   let result = await page.evaluate(function () {
-//     return Array.from(document.querySelectorAll(".ODSEW-ShBeI-text")).map(
-//       (el) => el.innerText.replace(/\s/gi, " ").replace(/  /gi, "")
-//     );
-//   });
-
-//   await browser.close();
-
-//   result = result.filter((el) => el.length > 0);
-//   return result;
-};
-
-scrape().then(console.log);
+scrapeOpenTable();
